@@ -14,10 +14,21 @@
 %% limitations under the License.
 %%--------------------------------------------------------------------
 
--module(emqx_plugin_template_SUITE).
+-module(emqx_gph_app).
 
--compile(export_all).
+-behaviour(application).
 
-all() -> [].
+-emqx_plugin(?MODULE).
 
-groups() -> [].
+-export([ start/2
+        , stop/1
+        ]).
+
+start(_StartType, _StartArgs) ->
+    {ok, Sup} = emqx_gph_sup:start_link(),
+    emqx_gph:load(application:get_all_env()),
+    {ok, Sup}.
+
+stop(_State) ->
+    emqx_gph:unload().
+

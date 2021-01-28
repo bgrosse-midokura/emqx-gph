@@ -14,13 +14,10 @@
 %% limitations under the License.
 %%--------------------------------------------------------------------
 
--module(emqx_cli_demo).
+-module(emqx_gph_SUITE).
 
--export([cmd/1]).
+-compile(export_all).
 
-cmd(["arg1", "arg2"]) ->
-    emqx_ctl:print("ok");
+all() -> [].
 
-cmd(_) ->
-    emqx_ctl:usage([{"cmd arg1 arg2", "cmd demo"}]).
-
+groups() -> [].
